@@ -1,10 +1,15 @@
+import { Outlet, Link } from "react-router-dom"
 import './App.css'
+import Header from './components/Header'
 
 function App() {
 
   return (
     <>
-      <h1 className='text-6xl'>Film Blog</h1>
+      <Header />
+      <main>
+        <Outlet />
+      </main>
     </>
   )
 }
