@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-dark-purple text-cyan drop-shadow-text-shadow leading-normal;
+  }
+}
+
+nav Link .active::after {
+  @apply border-b-2 border-cyan;
+}
