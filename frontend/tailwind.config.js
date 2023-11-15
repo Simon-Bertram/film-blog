@@ -19,6 +19,9 @@ export default {
         'cyan':    '#32fbe2',
         'dark-purple': '#1a0933',
       }, 
+      fontFamily: {
+        bangers: ['Bangers', 'cursive'],
+      },
       backgroundImage: {
         'hero-img': "url('/img/jake-hills-23LET4Hxj_U-unsplash.jpg')"
       },

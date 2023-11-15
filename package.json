@@ -2,9 +2,12 @@
   "name": "film-blog",
   "version": "1.0.0",
   "description": "MERN stack film blog",
-  "main": "index.js",
+  "main": "backend/src/server.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server": "node backend/src/server.js",
+    "client": "npm run dev --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "",
   "license": "ISC",

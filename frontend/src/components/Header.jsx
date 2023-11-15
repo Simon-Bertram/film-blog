@@ -12,7 +12,7 @@ const Header = () => {
         <nav className="flex justify-between items-center p-6 lg:px-8" aria-label="Global">
           <Link to={'/'}>
             <div>
-              <h1 className="text-4xl drop-shadow-text-shadow">FilmZilla</h1>
+              <h1 className="text-6xl font-bangers drop-shadow-text-shadow tracking-wide">FilmZilla</h1>
             </div>
           </Link>
 

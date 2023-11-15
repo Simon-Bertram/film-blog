@@ -1,6 +1,8 @@
 const ReviewPage = () => {
   return ( 
-    <p>Review to appear here</p>
+    <article>
+      <p>Review to appear here</p>
+    </article>
    );
 }
  
