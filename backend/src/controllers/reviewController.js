@@ -1,6 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import Review from '../models/reviewModel.js';
 import User from '../models/userModel.js';
+import Comment from '../models/commentModel.js';
 
 // @desc   Get a review by name
 // route   GET /api/reviews/:name
@@ -73,8 +74,47 @@ const upvoteReview = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc   Add a comment
+// route   POST /api/reviews/:name/addComment
+// access  Public
+const addComment = asyncHandler(async (req, res) => {
+  res.send('TODO - Add comment');
+});
+
+// @desc   Upvote a comment
+// route   POST /api/reviews/:commentId/upvote
+// access  Private
+const upvoteComment = asyncHandler(async (req, res) => {
+  const { comment_id } = req.params;
+
+  // Find the comment by its id
+  const comment = await Comment.findById(comment_id);
+
+  if (comment) {
+    // Check if the user has already upvoted the comment
+    const alreadyUpvoted = comment.upvotes.includes(req.user._id);
+
+    if (alreadyUpvoted) {
+      res.status(400);
+      throw new Error('You have already upvoted this comment');
+    } else {
+      // Add the user's id to the upvotes array
+      comment.upvotes.push({ user: req.user._id });
+      await comment.save();
+      res.status(200).json({
+        message: 'Upvote successful!',
+        upvotes: comment.upvotes.length,
+      });
+    }
+  } else {
+    res.status(404).send('Comment not found');
+  }
+});
+
 export {
   getReview,
   createReview,
   upvoteReview,
+  addComment,
+  upvoteComment,
 }

@@ -29,11 +29,6 @@ app.use('/api/reviews', reviewRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
-app.get('/', (req, res) => {
-  console.log("root route hit");
-  res.send('API is running...');
-});
-
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
