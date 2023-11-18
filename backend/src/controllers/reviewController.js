@@ -76,9 +76,42 @@ const upvoteReview = asyncHandler(async (req, res) => {
 
 // @desc   Add a comment
 // route   POST /api/reviews/:name/addComment
-// access  Public
+// access  Private
 const addComment = asyncHandler(async (req, res) => {
-  res.send('TODO - Add comment');
+  const { name } = req.params;
+  const { comment } = req.body;
+
+  // Get the user's ID from the request
+  console.log(req.user);
+  const userId = req.user._id;
+  if (!userId) {
+    return res.status(401).json({ message: "You must be logged in to upvote a review" });
+  }
+
+  // Find the review by name
+  const review = await Review.findOne({ name });
+
+  if (review) {
+    // Create a new comment
+    const newComment = new Comment({
+      comment,
+      postedBy: req.user._id,
+      review: review._id,
+    });
+
+    // Save the comment
+    await newComment.save();
+
+    // Add the comment to the review's comments array
+    review.comments.push(newComment._id);
+
+    // Save the updated review
+    await review.save();
+
+    res.status(201).json(newComment);
+  } else {
+    res.status(404).send('Review not found');
+  }
 });
 
 // @desc   Upvote a comment
