@@ -7,12 +7,12 @@ const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return ( 
-    <header className="border">
+    <header>
       <div className="bg-hero-img bg-center bg-no-repeat bg-cover h-screen">{/* background image container*/} 
         <nav className="flex justify-between items-center p-6 lg:px-8" aria-label="Global">
           <Link to={'/'}>
             <div>
-              <h1 className="text-6xl font-bangers drop-shadow-text-shadow tracking-wide">FilmZilla</h1>
+              <h1 className="text-6xl font-bangers drop-shadow-xl tracking-wide">FilmZilla</h1>
             </div>
           </Link>
 
@@ -20,12 +20,12 @@ const Header = () => {
           <div className="flex lg:hidden">
             <button 
               type="button" 
-              class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+              className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
               onClick={() => setMobileMenuOpen(true)}
             >
-              <span class="sr-only">Open main menu</span>
-              <svg class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="cyan" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+              <span className="sr-only">Open main menu</span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
               </svg>
             </button>
           </div>
@@ -41,13 +41,19 @@ const Header = () => {
             <form>   
               <label htmlFor="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
               
-              <div class="relative">
-                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                  <svg class="w-4 h-4 text-gray-200 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                  </svg>
+              <div className="relative">
+                <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                </svg>
                 </div>
-                  <input type="search" id="default-search" class="block w-60 p-2 ps-10 text-sm text-cyan border border-gray-300 rounded-lg bg-transparent focus:ring-cyan focus:border-cyan dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..." required />
+                  <input 
+                    type="search" 
+                    id="default-search" 
+                    className="block w-60 p-2 ps-10 text-sm text-cyan border border-gray-300 rounded-lg bg-transparent focus:ring-cyan focus:border-cyan dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                    placeholder="Search..." 
+                    required 
+                  />
                 </div>
             </form>
           </div>
@@ -57,7 +63,9 @@ const Header = () => {
         <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
           {/* Background backdrop, show/hide based on slide-over state */}
           <div className="fixed inset-0 z-50" />
-          <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-dark-purple px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+          <Dialog.Panel 
+            className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-dark-purple px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
+          >
             <div className="flex items-center justify-between">
               {/* Hamburger menu button */}
               <button
@@ -92,13 +100,19 @@ const Header = () => {
                   <form>   
                     <label htmlFor="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                     
-                    <div class="relative">
-                      <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                        </svg>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                      <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                      </svg>
                       </div>
-                        <input type="search" id="default-search" class="block w-60 p-2 ps-10 text-sm text-white border border-gray-300 rounded-lg bg-transparent focus:ring-cyan focus:border-cyan dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..." required />
+                        <input 
+                          type="search" 
+                          id="default-search" 
+                          className="block w-60 p-2 ps-10 text-sm text-white border border-gray-300 rounded-lg bg-transparent focus:ring-cyan focus:border-cyan dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                          placeholder="Search..." 
+                          required 
+                        />
                       </div>
                   </form>
                 </div>
