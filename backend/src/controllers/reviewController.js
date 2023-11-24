@@ -3,6 +3,14 @@ import Review from '../models/reviewModel.js';
 import User from '../models/userModel.js';
 import Comment from '../models/commentModel.js';
 
+// @desc   Get all reviews
+// route   GET /api/reviews/all
+// access  Public
+const getAllReviews = asyncHandler(async (req, res) => {
+  const reviews = await Review.find({});
+  res.json(reviews);
+});
+
 // @desc   Get a review by name
 // route   GET /api/reviews/:name
 // access  Public
@@ -146,6 +154,7 @@ const upvoteComment = asyncHandler(async (req, res) => {
 
 export {
   getReview,
+  getAllReviews,
   createReview,
   upvoteReview,
   addComment,

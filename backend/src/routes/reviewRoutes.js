@@ -1,5 +1,6 @@
 import express from 'express';
 import {
+  getAllReviews,
   getReview,
   createReview,
   upvoteReview,
@@ -10,6 +11,7 @@ import { protect } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
+router.get('/all', getAllReviews);
 router.get('/:name', getReview);
 router.route('/:name')
   .post(protect, createReview);
