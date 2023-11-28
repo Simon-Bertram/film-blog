@@ -11,7 +11,7 @@ const getAllReviews = asyncHandler(async (req, res) => {
   res.json(reviews);
 });
 
-// @desc   Get a review by name
+// @desc   Get a review and its comments using the review name url param
 // route   GET /api/reviews/:name
 // access  Public
 const getReview = asyncHandler(async (req, res) => {
@@ -19,7 +19,10 @@ const getReview = asyncHandler(async (req, res) => {
   const review = await Review.findOne({ name });
 
   if (review) {
-    res.status(200).json(review);
+    // Load the comments for the review
+    const populatedReview = await Review.findById(review._id).populate('comments');
+
+    res.status(200).json({ review: populatedReview, comments: populatedReview.comments });
   } else {
     res.status(404);
     throw new Error("Review not found");
@@ -47,7 +50,7 @@ const createReview = asyncHandler(async (req, res) => {
 });
 
 // @desc   Upvote a review
-// route   PUT /api/reviews/:name/upvote
+// route   PUT /c
 // access  Private
 const upvoteReview = asyncHandler(async (req, res) => {
   try {
@@ -86,6 +89,7 @@ const upvoteReview = asyncHandler(async (req, res) => {
 // route   POST /api/reviews/:name/addComment
 // access  Private
 const addComment = asyncHandler(async (req, res) => {
+  // Get the review name and user comment from the request
   const { name } = req.params;
   const { comment } = req.body;
 

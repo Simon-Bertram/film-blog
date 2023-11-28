@@ -7,6 +7,7 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 import App from './App.jsx'
+import LoginPage from './pages/LoginPage.jsx'
 import AboutPage from './pages/AboutPage.jsx'
 import ReviewPage from './pages/ReviewPage.jsx'
 import ReviewListPage from './pages/ReviewListPage.jsx'
@@ -17,6 +18,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />} errorElement={<ErrorPage />} >
       <Route index={true} path='/' element={<ReviewListPage />} />
+      <Route path='/login' element={<LoginPage />} />
       <Route path='/about' element={<AboutPage />} />
       <Route path='/reviews' element={<ReviewListPage />} />
       <Route path='/reviews/:reviewId' element={<ReviewPage />} />
