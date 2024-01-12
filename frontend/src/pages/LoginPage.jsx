@@ -10,6 +10,25 @@ const LoginPage = () => {
 
   const navigate = useNavigate();
 
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post('http://localhost:8000/api/users/auth', { formData }, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+  });
+
+    if (response.status === 200) {
+      alert('Login successful');
+      navigate('/');
+    } else {
+      alert('Login failed');
+    }
+   } catch (error) {
+      console.error(error?.message);
+    }
+  };
+
   const handleChange = (event) => {
     setFormData({
       ...formData,
@@ -50,6 +69,7 @@ const LoginPage = () => {
           id="password"
         />
         <button 
+          onClick={handleLogin}
           className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-80 disabled:opacity-50"
         >
           {loading ? 'Loading' : 'Sign In'}

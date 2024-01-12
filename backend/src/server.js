@@ -8,6 +8,7 @@ import reviewRoutes from "./routes/reviewRoutes.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import { cookie } from "express-validator";
 import cookieParser from "cookie-parser";
+import { corsMiddleware } from "./middleware/corsMiddleware.js";
 
 const PORT = process.env.PORT || 5000;
 const app = express();
@@ -27,6 +28,7 @@ app.use(cookieParser());
 app.use('/api/users', userRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use(notFound);
+app.use(corsMiddleware);
 app.use(errorHandler);
 
 app.listen(PORT, () => {
