@@ -18,7 +18,10 @@ connectDB();
 // Allow the frontend to make requests from a different origin
 const corsOptions = {
   origin: process.env.FRONTEND_URL || "http://localhost:5173",
-  optionsSuccessStatus: 200,
+  optionsSuccessStatus: 200, // Set a 200 status for preflight requests
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Allow these methods
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allow these headers
+  credentials: true, // Allow cookies to be sent with CORS requests
 };
 app.use(cors(corsOptions));
 

@@ -1,33 +1,46 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { set } from "mongoose";
+import { useState, useEffect } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { useLoginMutation } from "../redux/slices/usersApiSlice"
+import { login } from "../redux/slices/authSlice"
+import axios from "axios"
+
 
 const LoginPage = () => {
-  const [formData, setFormData] = useState({});
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [formData, setFormData] = useState({})
+  const [loading, setLoading] = useState(false)
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
-  const handleLogin = async () => {
-    try {
-      const response = await axios.post('http://localhost:8000/api/users/auth', { formData }, {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
-  });
+  const [login, { isLoading, error }] = useLoginMutation()
 
-    if (response.status === 200) {
-      alert('Login successful');
-      navigate('/');
-    } else {
-      alert('Login failed');
+  const { userInfo } = useSelector((state) => state.auth)
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate('/')
     }
-   } catch (error) {
-      console.error(error?.message);
-    }
-  };
+  }, [navigate, userInfo])
+
+  // const handleLogin = async () => {
+  //   try {
+  //     const response = await axios.post('http://localhost:8000/api/users/auth', { formData }, {
+  //     headers: {
+  //       'Content-Type': 'application/x-www-form-urlencoded'
+  //     }
+  // });
+
+  //   if (response.status === 200) {
+  //     alert('Login successful')
+  //     navigate('/')
+  //   } else {
+  //     alert('Login failed')
+  //   }
+  //  } catch (error) {
+  //     console.error(error?.message)
+  //   }
+  // }
 
   const handleChange = (event) => {
     setFormData({
@@ -37,21 +50,22 @@ const LoginPage = () => {
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
     setLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:8000/api/users/auth', formData);
-      setLoading(false);
+      const response = await login( email, password ).unwrap()
+      dispatch(login(response))
+      navigate('/')
+      setLoading(false)
     } catch (error) {
-      console.error(error?.message);
-      setError('Invalid email or password');
+      toast.error(error?.data?.message || error.error)
     }
   };
 
   return ( 
-    <div className="p-3 max-w-lg mx-auto -mt-24">
+    <div className="p-3 max-w-lg mx-auto -mt-60 rounded-lg bg-slate-800/70">
       <h1 className="text-3xl text-center font-semibold my-7">Sign In</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <input 
@@ -69,7 +83,7 @@ const LoginPage = () => {
           id="password"
         />
         <button 
-          onClick={handleLogin}
+          type="submit"
           className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-80 disabled:opacity-50"
         >
           {loading ? 'Loading' : 'Sign In'}
